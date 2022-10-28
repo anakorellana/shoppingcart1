@@ -102,7 +102,9 @@ const Products = (props) => {
   const addToCart = (e) => {
     let name = e.target.name;
     let item = items.filter((item) => item.name == name);
-    console.log()
+    if(item[0].instock == 0)return;
+    item[0].instock = item[0].instock -1
+  
     console.log(`add to Cart ${JSON.stringify(item)}`);
     setCart([...cart, ...item]);
     
@@ -170,14 +172,14 @@ const Products = (props) => {
     return newTotal;
   };
 
-  // const stockReducer = () => {
-  //   let stock = products.map((item) => item.instock);
-  //   // const reducer = (accum, current) => accum + current;
-  //   // let newTotal = costs.reduce(reducer, 0);
-  //   // console.log(`total updated to ${newTotal}`);
-  //   // return newTotal;
-  //   console.log(`current items ${stock}`)
-  // };
+  const stockReducer = () => {
+    let stock = products.map((item) => item.instock);
+    const reducer = (accum, current) => accum + current;
+    let newTotal = costs.reduce(reducer, 0);
+    console.log(`total updated to ${newTotal}`);
+    return newTotal;
+    console.log(`current items ${stock}`)
+   };
 
 
 
